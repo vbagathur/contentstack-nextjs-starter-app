@@ -1,5 +1,5 @@
 import { addEditableTags } from "@contentstack/utils";
-import { Page, BlogPosts } from "../typescript/pages";
+import { Page, BlogPosts, Heroes } from "../typescript/pages";
 import getConfig from "next/config";
 import { FooterProps, HeaderProps } from "../typescript/layout";
 import { getEntry, getEntryByUrl } from "../contentstack-sdk";
@@ -77,5 +77,27 @@ export const getBlogPostRes = async (entryUrl: string): Promise<BlogPosts> => {
     jsonRtePath: ["body", "related_post.body"],
   })) as BlogPosts[];
   liveEdit && addEditableTags(response[0], "blog_post", true);
+  return response[0];
+};
+
+export const getHeroesListRes = async (): Promise<Heroes[]> => {
+  const response = (await getEntry({
+    contentTypeUid: "character",
+    referenceFieldPath: ["author"],
+    jsonRtePath: ["body"],
+  })) as Heroes[][];
+  liveEdit &&
+    response[0].forEach((entry) => addEditableTags(entry, "character", true));
+  return response[0];
+};
+
+export const getHeroesPostRes = async (entryUrl: string): Promise<Heroes> => {
+  const response = (await getEntryByUrl({
+    contentTypeUid: "character",
+    entryUrl,
+    referenceFieldPath: ["author"],
+    jsonRtePath: ["body", "related_post.body"],
+  })) as Heroes[];
+  liveEdit && addEditableTags(response[0], "character", true);
   return response[0];
 };

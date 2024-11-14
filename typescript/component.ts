@@ -129,6 +129,7 @@ export type FeaturedBlogData = {
 
 export type RenderProps = {
   blogPost?: boolean;
+  heroesPost?: boolean;
   contentTypeUid: string;
   entryUid: string;
   locale: string;

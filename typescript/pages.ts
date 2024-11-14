@@ -28,6 +28,9 @@ type Post = {
   body: string;
   featured_image: Image;
   title: string;
+  description: string;
+  image: Image;
+  name: string;
   date: string;
   author: [Author];
   $: AdditionalParam;
@@ -35,6 +38,7 @@ type Post = {
 
 type Author = {
   title: string;
+  name: string;
   $: AdditionalParam;
 }
 
@@ -101,6 +105,24 @@ export type BlogPosts = {
   locale: string;
   featured_image: Image;
   is_archived: boolean;
+  seo: Seo;
+  uid:string;
+  url: string;
+  _owner: string;
+  $: AdditionalParam;
+}
+
+export type Heroes = {
+  title: string;
+  body: string;
+  author: any;
+  is_archived: any;
+  name: string;
+  date: string;
+  description: string;
+  powers: [];
+  locale: string;
+  image: Image;
   seo: Seo;
   uid:string;
   url: string;
